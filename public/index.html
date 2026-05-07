@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spi TV | پلاتفۆرمی گشتگیری ئیسلامی</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PX37LGHGB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6PX37LGHGB');
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bbc-black: #111111;
+            --bbc-red: #bb1919; 
+            --islamic-green: #2c5e2e;
+            --light-bg: #f6f6f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            margin: 0; padding: 0; color: #222;
+        }
+
+        .top-nav {
+            background: var(--bbc-black);
+            color: white;
+            padding: 10px 5%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+        .top-nav::-webkit-scrollbar { display: none; }
+        
+        .logo-box {
+            background: var(--islamic-green);
+            padding: 5px 15px;
+            font-weight: bold;
+            font-size: 22px;
+            color: white;
+            text-decoration: none;
+            position: sticky;
+            right: 0;
+        }
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+        .top-nav a:hover { border-bottom: 2px solid var(--islamic-green); }
+
+        .live-bar {
+            background: var(--bbc-red);
+            color: white;
+            padding: 10px 5%;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-weight: bold;
+        }
+        .live-channels { display: flex; gap: 10px; overflow-x: auto; }
+        .channel-btn {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px;
+        }
+        .main-content article {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .article-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        h2 { border-right: 5px solid var(--islamic-green); padding-right: 10px; }
+
+        .sidebar .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-top: 4px solid var(--islamic-green);
+            border-radius: 8px;
+        }
+
+        footer {
+            background: var(--bbc-black);
+            color: #ccc;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        @keyframes blink { 50% { opacity: 0.2; } }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="top-nav">
+    <a href="index.html" class="logo-box">Spi TV</a>
+    <a href="index.html">سەرەتا</a>
+    <a href="#">هەواڵ</a>
+    <a href="#">کوردستان</a>
+    <a href="#">عیراق</a>
+    <a href="#">جیهان</a>
+    <a href="#">وەرزش</a>
+    <a href="#">تەندروستی</a>
+    <a href="#">تەکنەلۆژیا</a>
+    <a href="about.html">دەربارە</a>
+</div>
+
+<div class="live-bar">
+    <span><i class="fas fa-circle" style="color: #fff; font-size: 10px; animation: blink 1s infinite;"></i> پەخشی ڕاستەوخۆ</span>
+    <div class="live-channels">
+        <a href="#" class="channel-btn">Spi Quran</a>
+        <a href="#" class="channel-btn">Spi Sport</a>
+    </div>
+</div>
+
+<div class="container">
+    <main class="main-content" id="news-section">
+        <h2>دوایین بابەتەکان</h2>
+        <p id="loading-text">خەریکی بارکردنی بابەتەکانە...</p>
+    </main>
+
+    <aside class="sidebar">
+        <div class="widget">
+            <h3>کەش و هەوا</h3>
+            <div style="background: linear-gradient(to bottom, #4facfe, #00f2fe); color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                <i class="fas fa-cloud-sun fa-2x"></i>
+                <h4>هەولێر: 28°C</h4>
+            </div>
+        </div>
+        <div class="widget">
+            <h3>بەشی ئەدمین</h3>
+            <p>بۆ بڵاوکردنەوەی بابەتی نوێ لێرە کلیک بکە:</p>
+            <a href="admin.html" style="color: var(--islamic-green); font-weight: bold;">چوونە ژوورەوە</a>
+        </div>
+    </aside>
+</div>
+
+<footer>
+    <p>Spi TV - هەموو مافەکان پارێزراوە 2026</p>
+</footer>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCabb4yLQnDvG-W32OG49efQDNahpqNK_I",
+        authDomain: "spi-tv-50e79.firebaseapp.com",
+        projectId: "spi-tv-50e79",
+        storageBucket: "spi-tv-50e79.firebasestorage.app",
+        messagingSenderId: "226225941988",
+        appId: "1:226225941988:web:783f78b5b271936deb2bf1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const newsContainer = document.getElementById('news-section');
+    const q = query(collection(db, "news"), orderBy("date", "desc"));
+
+    onSnapshot(q, (snapshot) => {
+        newsContainer.innerHTML = '<h2>دوایین بابەتەکان</h2>';
+        
+        if (snapshot.empty) {
+            newsContainer.innerHTML += '<p>هیچ بابەتێک نییە بۆ نیشاندان.</p>';
+            return;
+        }
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const imageHtml = data.image ? `<img src="${data.image}" class="article-img" alt="Spi TV">` : '';
+            
+            const article = document.createElement('article');
+            article.innerHTML = `
+                ${imageHtml}
+                <span style="color: var(--islamic-green); font-weight: bold; font-size: 13px;">${data.category || 'گشتی'}</span>
+                <h3 style="margin: 10px 0;">${data.title}</h3>
+                <p style="color: #444; line-height: 1.6;">${data.content}</p>
+            `;
+            newsContainer.appendChild(article);
+        });
+    });
+</script>
+</body>
+</html>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6PX37LGHGB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6PX37LGHGB');
+</script>

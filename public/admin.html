@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spi TV Admin | زیادکردنی بابەت</title>
+    <style>
+        :root { --islamic-green: #2c5e2e; --light-bg: #f6f6f6; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); display: flex; justify-content: center; padding: 20px; }
+        .admin-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        .form-group { margin-bottom: 15px; }
+        input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: var(--islamic-green); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        #status { margin-top: 15px; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="admin-card">
+    <h2 style="text-align:center; color: var(--islamic-green);">بڵاوکردنەوەی بابەت</h2>
+    <div class="form-group">
+        <label>ناونیشانی بابەت</label>
+        <input type="text" id="title">
+    </div>
+    <div class="form-group">
+        <label>بەش (Category)</label>
+        <select id="category">
+            <option value="کوردستان">کوردستان</option>
+            <option value="جیهان">جیهان</option>
+            <option value="وەرزش">وەرزش</option>
+            <option value="ئایینی">ئایینی</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>ناوەڕۆک</label>
+        <textarea id="content" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+        <label>وێنەی بابەت</label>
+        <input type="file" id="imageFile" accept="image/*">
+    </div>
+    <button id="submitBtn">بڵاوکردنەوە</button>
+    <div id="status"></div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCabb4yLQnDvG-W32OG49efQDNahpqNK_I",
+        authDomain: "spi-tv-50e79.firebaseapp.com",
+        projectId: "spi-tv-50e79",
+        storageBucket: "spi-tv-50e79.firebasestorage.app",
+        messagingSenderId: "226225941988",
+        appId: "1:226225941988:web:783f78b5b271936deb2bf1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    const submitBtn = document.getElementById('submitBtn');
+    const status = document.getElementById('status');
+
+    submitBtn.addEventListener('click', async () => {
+        const title = document.getElementById('title').value;
+        const category = document.getElementById('category').value;
+        const content = document.getElementById('content').value;
+        const file = document.getElementById('imageFile').files[0];
+
+        if(!title || !content) {
+            status.innerText = "تکایە هەموو خانەکان پڕ بکەرەوە!";
+            status.style.color = "red";
+            return;
+        }
+
+        status.innerText = "خەریکی ناردنە...";
+        status.style.color = "blue";
+
+        try {
+            let imageUrl = "";
+            if(file) {
+                const storageRef = ref(storage, 'news_images/' + Date.now() + "_" + file.name);
+                await uploadBytes(storageRef, file);
+                imageUrl = await getDownloadURL(storageRef);
+            }
+
+            await addDoc(collection(db, "news"), {
+                title, category, content,
+                image: imageUrl,
+                date: serverTimestamp()
+            });
+
+            status.innerText = "بەسەرکەوتوویی بڵاوکرایەوە!";
+            status.style.color = "green";
+            document.getElementById('title').value = "";
+            document.getElementById('content').value = "";
+        } catch (e) {
+            status.innerText = "هەڵەیەک ڕوویدا!";
+            status.style.color = "red";
+        }
+    });
+</script>
+</body>
+</html>
